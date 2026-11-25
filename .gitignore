@@ -1,0 +1,9 @@
+node_modules/
+session/
+captures/
+output/
+input/
+*.log
+.env
+.env.*
+!.env.example
