@@ -18,6 +18,8 @@ npm install
 
 O `postinstall` aplica automaticamente o patch necessário dentro do Baileys. `node_modules` não deve ser versionado.
 
+As pastas `input/`, `output/` e `session/` são criadas automaticamente ao iniciar o projeto. Coloque os arquivos de mídia em `input/` antes de executar.
+
 ## Mídia e destino
 
 Os arquivos de trabalho ficam em `input/` e `output/`, ignorados pelo Git. A configuração atual usa `output/teste3.webp` e `output/teste3-video-opus.ogg`.

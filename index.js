@@ -13,6 +13,15 @@ import ffmpegPath from 'ffmpeg-static'
 
 const execFileAsync = promisify(execFile)
 
+/** Garante a estrutura local necessária para execução. */
+async function ensureRuntimeDirectories() {
+    await Promise.all([
+        fs.mkdir('./input', { recursive: true }),
+        fs.mkdir('./output', { recursive: true }),
+        fs.mkdir('./session', { recursive: true })
+    ])
+}
+
 /** Solicita e normaliza um número ou JID de WhatsApp. */
 async function askDestinationJid() {
     const readline = createInterface({ input, output })
@@ -90,6 +99,7 @@ async function sendStickerAudio(sock, targetJid, mediaFiles) {
 
 /** Inicia a sessão, aguarda o QR Code e controla o ciclo de conexão. */
 async function startWhatsApp() {
+    await ensureRuntimeDirectories()
     const targetJid = await askDestinationJid()
     const mediaFiles = await prepareMedia(await selectInputFiles())
     const { state, saveCreds } = await useMultiFileAuthState('./session')
